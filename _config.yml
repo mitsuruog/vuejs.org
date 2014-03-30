@@ -98,4 +98,3 @@ markdown:
 deploy:
   type: github
   repository: git@github.com:mitsuruog/vuejs.org.git
-  branch: gh-pages
