@@ -3,53 +3,79 @@ type: guide
 order: 2
 ---
 
-## Introduction
+## 導入
 
-Vue.js is a library for building interactive web interfaces.
+_Vue.js is a library for building interactive web interfaces._
 
-Technically, Vue.js is focused on the [ViewModel](#ViewModel) layer of the MVVM pattern. It connects the [View](#View) and the [Model](#Model) via two way data bindings. Actual DOM manipulations and output formatting are abstracted away into [Directives](#Directives) and [Filters](#Filters).
+Vue.jsはインタラクティブなWebインターフェースを構築するためのライブラリです。
 
-Philosophically, the goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations. It is not a full-blown framework - it is designed to be simple and flexible. You can use it alone for rapid prototyping, or mix and match with other libraries for a custom front-end stack. It's also a natural fit for no-backend services such as Firebase.
+_Technically, Vue.js is focused on the [ViewModel](#ViewModel) layer of the MVVM pattern. It connects the [View](#View) and the [Model](#Model) via two way data bindings. Actual DOM manipulations and output formatting are abstracted away into [Directives](#Directives) and [Filters](#Filters)._
 
-Vue.js' API is heavily influenced by [AngularJS], [KnockoutJS], [Ractive.js] and [Rivets.js]. Despite the similarities, I believe Vue.js offers a valuable alternative to these existing libraries by finding a sweetspot between simplicity and functionality.
+技術的に、Vue.jsはMVVMパターンで言う[ViewModel](#ViewModel)層にフォーカスしてます。ViewModelは[View](#View)と[Model](#Model)をTwoway（双方向）データバインディングを介して繋いでいます。実際のDOM操作や出力フォーマットについては、[Directives](#Directives)や[Filters](#Filters)にて抽象化しています。
 
-Even if you are already familiar with some of these terms, it is recommended that you go through the following concepts overview because your notion of these terms might be different from what they mean in the Vue.js context.
+_hilosophically, the goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations. It is not a full-blown framework - it is designed to be simple and flexible. You can use it alone for rapid prototyping, or mix and match with other libraries for a custom front-end stack. It's also a natural fit for no-backend services such as Firebase._
 
-## Concepts Overview
+哲学的には、可能な限りシンプルなAPIを通じて、MVVMデータバインディングがもたらす恩恵を提供することがゴールです。もちろんモジュール化や部品化もデザイン上の重要な検討事項です。Vue.jsは華やかなフレームワークではありません（シンプルでフレキシブルになるようにデザインされています）。高速プロトタイピングを行ったり、他のライブラリと組み合わせて独自のフロントエンド基盤を構築するために、単独で利用できます。また、Firebaseのようなバックエンドがないサービスと組み合わせると自然にフィットするでしょう。
+
+_Vue.js' API is heavily influenced by [AngularJS], [KnockoutJS], [Ractive.js] and [Rivets.js]. Despite the similarities, I believe Vue.js offers a valuable alternative to these existing libraries by finding a sweetspot between simplicity and functionality._
+
+Vue.jsのAPIは[AngularJS], [KnockoutJS], [Ractive.js] そして [Rivets.js]の強い影響を受けています。似ているにも関わらず、機能性とシンプルさのちょうど良いとところを見つける事によって、Vue.jsがこれら既存のライブラリに対する貴重な代替手段となると信じています。
+
+_Even if you are already familiar with some of these terms, it is recommended that you go through the following concepts overview because your notion of these terms might be different from what they mean in the Vue.js context._
+
+既にあなたがこれらの用語のいくつか良く知っていたとしても、次に書かれているコンセプトの概要について、一読することをお勧めします。なぜなら、これらの用語についての概念は、Vue.jsの中では異なっている場合があるからです。
+
+## コンセプトの概要
 
 ### ViewModel
 
-An object that syncs the Model and the View. In Vue.js, ViewModels are instantiated with the `Vue` constructor or its sub-classes:
+_An object that syncs the Model and the View. In Vue.js, ViewModels are instantiated with the `Vue` constructor or its sub-classes:_
+
+ViewとModelを同期させるオブジェクト。Vue.jsでは、ViewModelは `Vue` コンストラクタ、もしくはサブクラスにてインスタンス化します。
 
 ```js
 var vm = new Vue({ /* options */ })
 ```
 
-This is the primary object that you will be interacting with as a developer when using Vue.js. For more details see [Class: Vue](/api/).
+_This is the primary object that you will be interacting with as a developer when using Vue.js. For more details see [Class: Vue](/api/)._
+
+Vue.jsを使う場合、開発者がもっとも良く対話する機会があるオブジェクトです。詳細についてはこちらを参照してください。[Class: Vue](/api/)
 
 ### View
 
-The actual HTML/DOM that the user sees.
+_The actual HTML/DOM that the user sees._
+
+ユーザーが見る実際のHTML/DOM。
 
 ```js
 vm.$el // The View
 ```
 
-When using Vue.js, you rarely have to touch the DOM yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes. These view updates are highly granular with the precision down to a textNode. They are also batched and executed asynchronously for greater performance.
+_When using Vue.js, you rarely have to touch the DOM yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes. These view updates are highly granular with the precision down to a textNode. They are also batched and executed asynchronously for greater performance._
+
+Vue.jsを使った場合、（後述する）カスタムディレクティブを除いて、DOMに触れることはほとんどありません。Viewの更新はデータの変化をトリガーに自動化されています。これらViewの更新は、TextNodeにまで至る非常にきめ細かいものです。そして、一連の動作は高いパフォーマンスのためバッチ化されており非同期で実行されます。
 
 ### Model
 
-A slightly modified plain JavaScript object.
+_A slightly modified plain JavaScript object._
+
+少し変更されたプレーンなJavascriptのオブジェクト。
 
 ```js
 vm.$data // The Model
 ```
 
-In Vue.js, models are simply plain JavaScript objects, or **data objects**. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. Vue.js converts the properties on data objects into ES5 getter/setters, which allows direct manipulation without the need for dirty checking.
+_In Vue.js, models are simply plain JavaScript objects, or **data objects**. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. Vue.js converts the properties on data objects into ES5 getter/setters, which allows direct manipulation without the need for dirty checking._
 
-The data objects are mutated in place, so modifying it by reference has the same effects as modifying `vm.$data`. This also makes it easy for multiple ViewModel instances to observe the same piece of data.
+Vue.jsの中でのModelは、Javascriptのシンプルなオブジェクトか、**データオブジェクト**です。これらのプロパティは操作することができ、監視しているViewModelに対して変更が通知されます。View.jsではプロパティをデータオブジェクトへ変換する際に、ES5のgetter/settersを使っています。そのため、煩わしいチェックをする必要がなく、安心して直接操作することが可能です。
 
-For technical details see [Instantiation Options: data](/api/instantiation-options.html#data).
+_The data objects are mutated in place, so modifying it by reference has the same effects as modifying `vm.$data`. This also makes it easy for multiple ViewModel instances to observe the same piece of data._
+
+The data objects are mutated in place, so modifying it by reference has the same effects as modifying `vm.$data`.またこの仕組みは、複数のViewModelのインスタンスが同じ場所のデータオブジェクトを監視することを容易にしています。
+
+_For technical details see [Instantiation Options: data](/api/instantiation-options.html#data)._
+
+技術的な詳細はこちらを参照してください。[インスタンス生成オプション: data](/api/instantiation-options.html#data)
 
 ### Directives
 
