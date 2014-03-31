@@ -77,9 +77,11 @@ _For technical details see [Instantiation Options: data](/api/instantiation-opti
 
 技術的な詳細はこちらを参照してください。[インスタンス生成オプション: data](/api/instantiation-options.html#data)
 
-### Directives
+### Directives（ディレクティブ）
 
-Prefixed HTML attributes that tell Vue.js to do something about a DOM element.
+_Prefixed HTML attributes that tell Vue.js to do something about a DOM element._
+
+DOMエレメントについて何を行うか、Vue.jsに命令するための接頭語付きHTML要素。
 
 ```html
 <div v-text="message"></div>
@@ -87,23 +89,37 @@ Prefixed HTML attributes that tell Vue.js to do something about a DOM element.
 
 Here the div element has a `v-text` directive with the value `message`. What it does is telling Vue.js to keep the div's textContent in sync with the ViewModel's `message` property.
 
-Directives can encapsulate arbitrary DOM manipulations. For example `v-attr` manipulates an element's attributes, `v-repeat` clones an element based on an Array, `v-on` attaches event listeners... we will cover them later.
+ここに、`message`という値の`v-text`ディレクティブを持つdivエレメントがあります。どのような意味かというと、ViewModelの`message`プロパティとdivのテキスト内容とを同期し続けるよう、Vue.jsに命じています。
+
+_Directives can encapsulate arbitrary DOM manipulations. For example `v-attr` manipulates an element's attributes, `v-repeat` clones an element based on an Array, `v-on` attaches event listeners... we will cover them later._
+
+ディレクティブは任意のDOM操作をカプセル化することができます。例えば、`v-attr`はエレメントの属性を操作します。`v-repeat`は、配列に基づくエレメントの複製を行います。`v-on`は、イベントにアタッチするなど。。。後ほどカバーします。
 
 ### Mustache Bindings
 
-You can also use mustache-style bindings, both in text and in attributes. They are translated into `v-text` and `v-attr` directives under the hood. For example:
+_You can also use mustache-style bindings, both in text and in attributes. They are translated into `v-text` and `v-attr` directives under the hood. For example:_
+
+また、テキストと属性の双方にて、mustache形式のバインディングも利用することができます。これらは、`v-text`と`v-attr`ディレクティブに暗黙的に変換されます。例えば、
 
 ```html
 <div id="person-&#123;&#123;id&#125;&#125;">Hello &#123;&#123;name&#125;&#125;!</div>
 ```
 
-Although it is convenient, there are a few things you need to be aware of:
+_Although it is convenient, there are a few things you need to be aware of:_
 
-<p class="tip">The `src` attribute on an `<image>` element makes an HTTP requests when a value is set, so when the template is first parsed it will result in a 404. In this case `v-attr` is preferred.</p>
+これは便利ではありますが、いくつか留意事項があります。
 
-<p class="tip">Internet Explorer will remove invalid inline `style` attributes when parsing HTML, so always use `v-style` when binding inline CSS if you want to support IE.</p>
+<p class="tip">_The `src` attribute on an `<image>` element makes an HTTP requests when a value is set, so when the template is first parsed it will result in a 404. In this case `v-attr` is preferred._
+`<image>`エレメントの`src`属性は値が設定された時にHTTPリクエストを要求します。そのため、テンプレートを初めて解析するタイミングでは、結果が404になります。このケースでは`v-attr`を使用してください。
+</p>
 
-<p class="tip">You can use triple mustaches &#123;&#123;&#123; like this &#125;&#125;&#125; for unescaped HTML, which translates to `v-html` internally. However, this can open up windows for potential XSS attacks, therefore it is suggested that you only use triple mustaches when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML.</p>
+<p class="tip">_Internet Explorer will remove invalid inline `style` attributes when parsing HTML, so always use `v-style` when binding inline CSS if you want to support IE._
+Internet ExplorerはHTML解析する際に無効なインライン`style`要素を削除します。そのため、インラインCSSをバインディングしてIEをサポートする場合、常に`v-style`を使用してください。
+</p>
+
+<p class="tip">_You can use triple mustaches &#123;&#123;&#123; like this &#125;&#125;&#125; for unescaped HTML, which translates to `v-html` internally. However, this can open up windows for potential XSS attacks, therefore it is suggested that you only use triple mustaches when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML._
+HTMLエスケープしない場合は、3連中括弧 &#123;&#123;&#123; このような &#125;&#125;&#125; を使用してください。内部で`v-html`に変換されます。しかし、これば潜在的なXSS攻撃に対する門戸を開くことになります。そのため、データソースに関するセキュリティについては万全であるか、この後に信頼できないHTMLをサニタイズするようなカスタムフィルタを通る場合で無い限り、3連中括弧は使用するべきではないと言えます。
+</p>
 
 ### Filters
 
