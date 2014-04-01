@@ -89,7 +89,7 @@ DOMエレメントについて何を行うか、Vue.jsに命令するための�
 
 Here the div element has a `v-text` directive with the value `message`. What it does is telling Vue.js to keep the div's textContent in sync with the ViewModel's `message` property.
 
-ここに、`message`という値の`v-text`ディレクティブを持つdivエレメントがあります。どのような意味かというと、ViewModelの`message`プロパティとdivのテキスト内容とを同期し続けるよう、Vue.jsに命じています。
+ここに、`message`という値の`v-text`ディレクティブを持つdivエレメントがあります。どのような意味かというと、ViewModelの`message`プロパティとdivのテキストの内容とを同期し続けるよう、Vue.jsに命じています。
 
 _Directives can encapsulate arbitrary DOM manipulations. For example `v-attr` manipulates an element's attributes, `v-repeat` clones an element based on an Array, `v-on` attaches event listeners... we will cover them later._
 
@@ -123,7 +123,9 @@ HTMLエスケープしない場合は、3連中括弧 &#123;&#123;&#123; この�
 
 ### Filters
 
-Functions that are used to process the raw values before updating the View. They are denoted by a "pipe" inside directives or bindings:
+_Functions that are used to process the raw values before updating the View. They are denoted by a "pipe" inside directives or bindings:_
+
+Viewを更新する前に生の値を処理するために使用される関数。これらはディレクティブやバインディングの内側で"パイプ(|)"で表記されています。
 
 ```html
 <div>&#123;&#123;message | capitalize&#125;&#125;</div>
@@ -131,9 +133,13 @@ Functions that are used to process the raw values before updating the View. They
 
 Now before the div's textContent is updated, the `message` value will first be passed through the `capitalize` function. For more details see [Filters in Depth](/guide/filters.html).
 
+divのテキストの内容が変更される直前、`message`値はまず`capitalize`関数を通って処理されます。詳細についてはこちらを参照してください。[Filters in Depth](/guide/filters.html)
+
 ### Components
 
-In Vue.js, a component is simply a ViewModel constructor registered with an ID using `Vue.component(ID, constructor)`. By having an associated ID, they can be nested in other ViewModel's templates with the `v-component` directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to [Web Components](http://www.w3.org/TR/components-intro/), without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see [Composing ViewModels](/guide/composition.html).
+_In Vue.js, a component is simply a ViewModel constructor registered with an ID using `Vue.component(ID, constructor)`. By having an associated ID, they can be nested in other ViewModel's templates with the `v-component` directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to [Web Components](http://www.w3.org/TR/components-intro/), without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see [Composing ViewModels](/guide/composition.html)._
+
+Vue.jsの中でのコンポーネントとは、`Vue.component(ID, constructor)`を使ってIDとシンプルはViewModelのコンストラクタを登録したものです。関連するIDを持つことで、`v-component`ディレクティブを使って他のViewModelテンプレートと入れ子にすることができます。このシンプルなメカニズムは、最新のブラウザや大変なポリフフィルを必要とすることなしに、今流行の[Web Components](http://www.w3.org/TR/components-intro/)と同じような、ViewModelの再利用と組み合わせを実現可能としています。アプリケーションを小さなコンポーネントに分割することで、結果、高レベルでカプセル化されたメンテナンスしやすいコードとなります。詳細についてはこちらを参照してください。[Composing ViewModels](/guide/composition.html)
 
 ## A Quick Example
 
