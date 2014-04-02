@@ -198,11 +198,17 @@ var demo = new Vue({
 })
 </script>
 
-Also available on [jsfiddle](http://jsfiddle.net/yyx990803/yMv7y/).
+_Also available on [jsfiddle](http://jsfiddle.net/yyx990803/yMv7y/)._
 
-You can click on a todo to toggle it, or you can open your Browser's console and play with the `demo` object - for example, change `demo.title`, push a new object into `demo.todos`, or toggle a todo's `done` state.
+[jsfiddle](http://jsfiddle.net/yyx990803/yMv7y/)でも利用可能です。
 
-You probably have a few questions in mind now - don't worry, we'll cover them soon. Next up: [Directives in Depth](/guide/directives.html).
+_You can click on a todo to toggle it, or you can open your Browser's console and play with the `demo` object - for example, change `demo.title`, push a new object into `demo.todos`, or toggle a todo's `done` state._
+
+todoをクリックすることで交互に切り替える事ができます。また、ブラウザのコンソールを開いて`demo`オブジェクトで遊ぶ事ができます。例えば、`demo.title`を変更したり、`demo.todos`の中に新しいオブジェクトを追加したり、todoの`done`の状態を交互に切り替えたり。
+
+_You probably have a few questions in mind now - don't worry, we'll cover them soon. Next up: [Directives in Depth](/guide/directives.html)._
+
+おそらく、今いくつか疑問があると思いますが、心配しないで。すぐカバーできます。次は、[Directives in Depth](/guide/directives.html)。
 
 [AngularJS]: http://angularjs.org
 [KnockoutJS]: http://knockoutjs.com
