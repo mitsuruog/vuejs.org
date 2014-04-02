@@ -139,7 +139,7 @@ divのテキストの内容が変更される直前、`message`値はまず`capi
 
 _In Vue.js, a component is simply a ViewModel constructor registered with an ID using `Vue.component(ID, constructor)`. By having an associated ID, they can be nested in other ViewModel's templates with the `v-component` directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to [Web Components](http://www.w3.org/TR/components-intro/), without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see [Composing ViewModels](/guide/composition.html)._
 
-Vue.jsの中でのコンポーネントとは、`Vue.component(ID, constructor)`を使ってIDとシンプルはViewModelのコンストラクタを登録したものです。関連するIDを持つことで、`v-component`ディレクティブを使って他のViewModelテンプレートと入れ子にすることができます。このシンプルなメカニズムは、最新のブラウザや大変なポリフフィルを必要とすることなしに、今流行の[Web Components](http://www.w3.org/TR/components-intro/)と同じような、ViewModelの再利用と組み合わせを実現可能としています。アプリケーションを小さなコンポーネントに分割することで、結果、高レベルでカプセル化されたメンテナンスしやすいコードとなります。詳細についてはこちらを参照してください。[Composing ViewModels](/guide/composition.html)
+Vue.jsの中でのコンポーネントとは、`Vue.component(ID, constructor)`を使ってIDとシンプルなViewModelのコンストラクタを登録したものです。関連するIDを持つことで、`v-component`ディレクティブを使って他のViewModelテンプレートと入れ子にすることができます。このシンプルなメカニズムは、最新のブラウザや大変なポリフフィルを必要とすることなしに、今流行の[Web Components](http://www.w3.org/TR/components-intro/)と同じような、ViewModelの再利用と組み合わせを実現可能としています。アプリケーションを小さなコンポーネントに分割することで、結果、高レベルでカプセル化されたメンテナンスしやすいコードとなります。詳細についてはこちらを参照してください。[Composing ViewModels](/guide/composition.html)
 
 ## A Quick Example
 
