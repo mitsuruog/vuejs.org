@@ -3,29 +3,35 @@ type: guide
 order: 3
 ---
 
-## Synopsis
+## 概要
 
-If you have not used AngularJS before, you probably don't know what a directive is. Essentially, a directive is some special token in the markup that tells the library to do something to a DOM element. In Vue.js, the concept of directive is drastically simpler than that in Angular. A Vue.js directive can only appear in the form of a prefixed HTML attribute that takes the following format:
+_If you have not used AngularJS before, you probably don't know what a directive is. Essentially, a directive is some special token in the markup that tells the library to do something to a DOM element. In Vue.js, the concept of directive is drastically simpler than that in Angular. A Vue.js directive can only appear in the form of a prefixed HTML attribute that takes the following format:_
+
+あなたがもし以前にAngularJSを使った事がない場合、おそらくディレクティブとは何か知らないでしょう。本来、ディレクティブはライブラリに対してDOMエレメントをどう扱うのか指示するための、マークアップ上の何か特別な印です。Vue.jsでのディレクティブのコンセプトは、Angularでのそれよりも大幅にシンプルにすることです。Vue.jsのディレクティブは、次に示す書式のように接頭語付きのHTML属性として表現されます。
 
 ``` html
 <element prefix-directiveId="[arg:] ( keypath | expression ) [filters...]"></element>
 ```
 
-## A Simple Example
+## 簡単な例
 
 ``` html
 <div v-text="message"></div>
 ```
 
-Here the prefix is `v` which is the default. The directive ID is `text` and the the keypath is `message`. This directive instructs Vue.js to update the div's `textContent` whenever the `message` property on the ViewModel changes.
+_Here the prefix is `v` which is the default. The directive ID is `text` and the the keypath is `message`. This directive instructs Vue.js to update the div's `textContent` whenever the `message` property on the ViewModel changes._
 
-## Inline Expressions
+ここでの接頭語`v`がデフォルトです。ディレクティブIDは`text`、そしてそのキーパスは`message`です。このディレクティブはViewModelの`message`プロパティが変更されるたびにdivの`textContent`を変更します。
+
+## インライン式
 
 ``` html
 <div v-text="'hello ' + user.firstName + ' ' + user.lastName"></div>
 ```
 
-Here we are using a computed expression instead of a single property key. Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop.
+_Here we are using a computed expression instead of a single property key. Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop._
+
+ここでは、単純なプロパティではなく計算式を使ってみます。Vue.jsは式が依存しているプロパティを自動的に追跡しています。そして、依存先が変更されるたびにディレクティブをリフレッシュします。非同期バッチ処理のおかげで、複数の依存先が変更されたとしても、式は1回のイベントループのみで変更されます。
 
 You should use expressions wisely and avoid putting too much logic in your templates, especially statements with side effects (with the exception of event listener expressions). To discourage the overuse logic inside templates, Vue.js inline expressions are limited to **one statement only**. For bindings that require more complicated operations, use [Computed Properties](/guide/computed.html) instead.
 
