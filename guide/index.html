@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>はじめに - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "guide"
+        </script>
+        <script src="/js/vue.min.js"></script>
+        <link rel="stylesheet" href="/vuejs.org/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        
+            <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>Vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+        <li><a href="/api/" class="nav-link">API Reference</a></li>
+        <br class="break" />
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+        
+            
+    <div class="sidebar">
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Guide</h2>
+        <ul>
+        
+            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+        
+            <li><a href="/guide/index.html" class="sidebar-link current">はじめに</a></li>
+        
+            <li><a href="/guide/directives.html" class="sidebar-link">ディレクティブの詳細</a></li>
+        
+            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        
+            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+        
+            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+        
+            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        
+            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+        
+            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+        
+            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+        
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+        
+            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<div class="content guide with-sidebar">
+    <h1>はじめに</h1>
+    <h2 id="導入">導入</h2>
+<p><em>Vue.js is a library for building interactive web interfaces.</em></p>
+<p>Vue.jsはインタラクティブなWebインターフェースを構築するためのライブラリです。</p>
+<p><em>Technically, Vue.js is focused on the <a href="#ViewModel">ViewModel</a> layer of the MVVM pattern. It connects the <a href="#View">View</a> and the <a href="#Model">Model</a> via two way data bindings. Actual DOM manipulations and output formatting are abstracted away into <a href="#Directives">Directives</a> and <a href="#Filters">Filters</a>.</em></p>
+<p>技術的に、Vue.jsはMVVMパターンで言う<a href="#ViewModel">ViewModel</a>層にフォーカスしてます。ViewModelは<a href="#View">View</a>と<a href="#Model">Model</a>をTwoway（双方向）データバインディングを介して繋いでいます。実際のDOM操作や出力フォーマットについては、<a href="#Directives">Directives</a>や<a href="#Filters">Filters</a>にて抽象化しています。</p>
+<p><em>hilosophically, the goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations. It is not a full-blown framework - it is designed to be simple and flexible. You can use it alone for rapid prototyping, or mix and match with other libraries for a custom front-end stack. It’s also a natural fit for no-backend services such as Firebase.</em></p>
+<p>哲学的には、可能な限りシンプルなAPIを通じて、MVVMデータバインディングがもたらす恩恵を提供することがゴールです。もちろんモジュール化や部品化もデザイン上の重要な検討事項です。Vue.jsは華やかなフレームワークではありません（シンプルでフレキシブルになるようにデザインされています）。高速プロトタイピングを行ったり、他のライブラリと組み合わせて独自のフロントエンド基盤を構築するために、単独で利用できます。また、Firebaseのようなバックエンドがないサービスと組み合わせると自然にフィットするでしょう。</p>
+<p><em>Vue.js’ API is heavily influenced by <a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://knockoutjs.com" target="_blank">KnockoutJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>. Despite the similarities, I believe Vue.js offers a valuable alternative to these existing libraries by finding a sweetspot between simplicity and functionality.</em></p>
+<p>Vue.jsのAPIは<a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://knockoutjs.com" target="_blank">KnockoutJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> そして <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>の強い影響を受けています。似ているにも関わらず、機能性とシンプルさのちょうど良いとところを見つける事によって、Vue.jsがこれら既存のライブラリに対する貴重な代替手段となると信じています。</p>
+<p><em>Even if you are already familiar with some of these terms, it is recommended that you go through the following concepts overview because your notion of these terms might be different from what they mean in the Vue.js context.</em></p>
+<p>既にあなたがこれらの用語のいくつか良く知っていたとしても、次に書かれているコンセプトの概要について、一読することをお勧めします。なぜなら、これらの用語についての概念は、Vue.jsの中では異なっている場合があるからです。</p>
+<h2 id="コンセプトの概要">コンセプトの概要</h2>
+<h3 id="ViewModel">ViewModel</h3>
+<p><em>An object that syncs the Model and the View. In Vue.js, ViewModels are instantiated with the <code>Vue</code> constructor or its sub-classes:</em></p>
+<p>ViewとModelを同期させるオブジェクト。Vue.jsでは、ViewModelは <code>Vue</code> コンストラクタ、もしくはサブクラスにてインスタンス化します。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({ <span class="comment">/* options */</span> })
+</pre></td></tr></table></figure>
+
+<p><em>This is the primary object that you will be interacting with as a developer when using Vue.js. For more details see <a href="/api/">Class: Vue</a>.</em></p>
+<p>Vue.jsを使う場合、開発者がもっとも良く対話する機会があるオブジェクトです。詳細についてはこちらを参照してください。<a href="/api/">Class: Vue</a></p>
+<h3 id="View">View</h3>
+<p><em>The actual HTML/DOM that the user sees.</em></p>
+<p>ユーザーが見る実際のHTML/DOM。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>vm.$el <span class="comment">// The View</span>
+</pre></td></tr></table></figure>
+
+<p><em>When using Vue.js, you rarely have to touch the DOM yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes. These view updates are highly granular with the precision down to a textNode. They are also batched and executed asynchronously for greater performance.</em></p>
+<p>Vue.jsを使った場合、（後述する）カスタムディレクティブを除いて、DOMに触れることはほとんどありません。Viewの更新はデータの変化をトリガーに自動化されています。これらViewの更新は、TextNodeにまで至る非常にきめ細かいものです。そして、一連の動作は高いパフォーマンスのためバッチ化されており非同期で実行されます。</p>
+<h3 id="Model">Model</h3>
+<p><em>A slightly modified plain JavaScript object.</em></p>
+<p>少し変更されたプレーンなJavascriptのオブジェクト。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>vm.$data <span class="comment">// The Model</span>
+</pre></td></tr></table></figure>
+
+<p><em>In Vue.js, models are simply plain JavaScript objects, or <strong>data objects</strong>. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. Vue.js converts the properties on data objects into ES5 getter/setters, which allows direct manipulation without the need for dirty checking.</em></p>
+<p>Vue.jsの中でのModelは、Javascriptのシンプルなオブジェクトか、<strong>データオブジェクト</strong>です。これらのプロパティは操作することができ、監視しているViewModelに対して変更が通知されます。View.jsではプロパティをデータオブジェクトへ変換する際に、ES5のgetter/settersを使っています。そのため、煩わしいチェックをする必要がなく、安心して直接操作することが可能です。</p>
+<p><em>The data objects are mutated in place, so modifying it by reference has the same effects as modifying <code>vm.$data</code>. This also makes it easy for multiple ViewModel instances to observe the same piece of data.</em></p>
+<p>The data objects are mutated in place, so modifying it by reference has the same effects as modifying <code>vm.$data</code>.またこの仕組みは、複数のViewModelのインスタンスが同じ場所のデータオブジェクトを監視することを容易にしています。</p>
+<p><em>For technical details see <a href="/api/instantiation-options.html#data">Instantiation Options: data</a>.</em></p>
+<p>技術的な詳細はこちらを参照してください。<a href="/api/instantiation-options.html#data">インスタンス生成オプション: data</a></p>
+<h3 id="Directives（ディレクティブ）">Directives（ディレクティブ）</h3>
+<p><em>Prefixed HTML attributes that tell Vue.js to do something about a DOM element.</em></p>
+<p>DOMエレメントについて何を行うか、Vue.jsに命令するための接頭語付きHTML要素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Here the div element has a <code>v-text</code> directive with the value <code>message</code>. What it does is telling Vue.js to keep the div’s textContent in sync with the ViewModel’s <code>message</code> property.</p>
+<p>ここに、<code>message</code>という値の<code>v-text</code>ディレクティブを持つdivエレメントがあります。どのような意味かというと、ViewModelの<code>message</code>プロパティとdivのテキストの内容とを同期し続けるよう、Vue.jsに命じています。</p>
+<p><em>Directives can encapsulate arbitrary DOM manipulations. For example <code>v-attr</code> manipulates an element’s attributes, <code>v-repeat</code> clones an element based on an Array, <code>v-on</code> attaches event listeners… we will cover them later.</em></p>
+<p>ディレクティブは任意のDOM操作をカプセル化することができます。例えば、<code>v-attr</code>はエレメントの属性を操作します。<code>v-repeat</code>は、配列に基づくエレメントの複製を行います。<code>v-on</code>は、イベントにアタッチするなど。。。後ほどカバーします。</p>
+<h3 id="Mustache_Bindings">Mustache Bindings</h3>
+<p><em>You can also use mustache-style bindings, both in text and in attributes. They are translated into <code>v-text</code> and <code>v-attr</code> directives under the hood. For example:</em></p>
+<p>また、テキストと属性の双方にて、mustache形式のバインディングも利用することができます。これらは、<code>v-text</code>と<code>v-attr</code>ディレクティブに暗黙的に変換されます。例えば、</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>Although it is convenient, there are a few things you need to be aware of:</em></p>
+<p>これは便利ではありますが、いくつか留意事項があります。</p>
+<p class="tip"><em>The <code>src</code> attribute on an <code>&lt;image&gt;</code> element makes an HTTP requests when a value is set, so when the template is first parsed it will result in a 404. In this case <code>v-attr</code> is preferred.</em><br><code>&lt;image&gt;</code>エレメントの<code>src</code>属性は値が設定された時にHTTPリクエストを要求します。そのため、テンプレートを初めて解析するタイミングでは、結果が404になります。このケースでは<code>v-attr</code>を使用してください。<br></p>
+
+<p class="tip"><em>Internet Explorer will remove invalid inline <code>style</code> attributes when parsing HTML, so always use <code>v-style</code> when binding inline CSS if you want to support IE.</em><br>Internet ExplorerはHTML解析する際に無効なインライン<code>style</code>要素を削除します。そのため、インラインCSSをバインディングしてIEをサポートする場合、常に<code>v-style</code>を使用してください。<br></p>
+
+<p class="tip"><em>You can use triple mustaches &#123;&#123;&#123; like this &#125;&#125;&#125; for unescaped HTML, which translates to <code>v-html</code> internally. However, this can open up windows for potential XSS attacks, therefore it is suggested that you only use triple mustaches when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML.</em><br>HTMLエスケープしない場合は、3連中括弧 &#123;&#123;&#123; このような &#125;&#125;&#125; を使用してください。内部で<code>v-html</code>に変換されます。しかし、これば潜在的なXSS攻撃に対する門戸を開くことになります。そのため、データソースに関するセキュリティについては万全であるか、この後に信頼できないHTMLをサニタイズするようなカスタムフィルタを通る場合で無い限り、3連中括弧は使用するべきではないと言えます。<br></p>
+
+<h3 id="Filters">Filters</h3>
+<p><em>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</em></p>
+<p>Viewを更新する前に生の値を処理するために使用される関数。これらはディレクティブやバインディングの内側で”パイプ(|)”で表記されています。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</p>
+<p>divのテキストの内容が変更される直前、<code>message</code>値はまず<code>capitalize</code>関数を通って処理されます。詳細についてはこちらを参照してください。<a href="/guide/filters.html">Filters in Depth</a></p>
+<h3 id="Components">Components</h3>
+<p><em>In Vue.js, a component is simply a ViewModel constructor registered with an ID using <code>Vue.component(ID, constructor)</code>. By having an associated ID, they can be nested in other ViewModel’s templates with the <code>v-component</code> directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to <a href="http://www.w3.org/TR/components-intro/" target="_blank">Web Components</a>, without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see <a href="/guide/composition.html">Composing ViewModels</a>.</em></p>
+<p>Vue.jsの中でのコンポーネントとは、<code>Vue.component(ID, constructor)</code>を使ってIDとシンプルなViewModelのコンストラクタを登録したものです。関連するIDを持つことで、<code>v-component</code>ディレクティブを使って他のViewModelテンプレートと入れ子にすることができます。このシンプルなメカニズムは、最新のブラウザや大変なポリフフィルを必要とすることなしに、今流行の<a href="http://www.w3.org/TR/components-intro/" target="_blank">Web Components</a>と同じような、ViewModelの再利用と組み合わせを実現可能としています。アプリケーションを小さなコンポーネントに分割することで、結果、高レベルでカプセル化されたメンテナンスしやすいコードとなります。詳細についてはこちらを参照してください。<a href="/guide/composition.html">Composing ViewModels</a></p>
+<h2 id="A_Quick_Example">A Quick Example</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">li
+</span>            <span class="attribute">v-repeat</span>=<span class="value">"todos"</span>
+            <span class="attribute">v-on</span>=<span class="value">"click: done = !done"</span>
+            <span class="attribute">class</span>=<span class="value">"&#123;&#123;done ? 'done' : ''&#125;&#125;"</span>&gt;</span>
+            &#123;&#123;content&#125;&#125;
+        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        title: <span class="string">'todos'</span>,
+        todos: [
+            {
+                done: <span class="literal">true</span>,
+                content: <span class="string">'Learn JavaScript'</span>
+            },
+            {
+                done: <span class="literal">false</span>,
+                content: <span class="string">'Learn vue.js'</span>
+            }
+        ]
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result</strong></p>
+<p><div id="demo"><h1>&#123;&#123;title | uppercase&#125;&#125;</h1><ul><li v-repeat="todos" v-on="click: done = !done" class="&#123;&#123;done ? 'done' : ''&#125;&#125;">&#123;&#123;content&#125;&#125;</li></ul></div></p>
+<script>
+var demo = new Vue({
+    el: '#demo',
+    data: {
+        title: 'todos',
+        todos: [
+            {
+                done: true,
+                content: 'Learn JavaScript'
+            },
+            {
+                done: false,
+                content: 'Learn vue.js'
+            }
+        ]
+    }
+})
+</script>
+
+<p><em>Also available on <a href="http://jsfiddle.net/yyx990803/yMv7y/" target="_blank">jsfiddle</a>.</em></p>
+<p><a href="http://jsfiddle.net/yyx990803/yMv7y/" target="_blank">jsfiddle</a>でも利用可能です。</p>
+<p><em>You can click on a todo to toggle it, or you can open your Browser’s console and play with the <code>demo</code> object - for example, change <code>demo.title</code>, push a new object into <code>demo.todos</code>, or toggle a todo’s <code>done</code> state.</em></p>
+<p>todoをクリックすることで交互に切り替える事ができます。また、ブラウザのコンソールを開いて<code>demo</code>オブジェクトで遊ぶ事ができます。例えば、<code>demo.title</code>を変更したり、<code>demo.todos</code>の中に新しいオブジェクトを追加したり、todoの<code>done</code>の状態を交互に切り替えたり。</p>
+<p><em>You probably have a few questions in mind now - don’t worry, we’ll cover them soon. Next up: <a href="/guide/directives.html">Directives in Depth</a>.</em></p>
+<p>おそらく、今いくつか疑問があると思いますが、心配しないで。すぐカバーできます。次は、<a href="/guide/directives.html">Directives in Depth</a>。</p>
+
+</div>
+        
+        </div>
+        <script src="/js/common.js"></script>
+    </body>
+</html>

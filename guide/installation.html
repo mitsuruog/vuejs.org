@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Installation - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "guide"
+        </script>
+        <script src="/js/vue.min.js"></script>
+        <link rel="stylesheet" href="/vuejs.org/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        
+            <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>Vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+        <li><a href="/api/" class="nav-link">API Reference</a></li>
+        <br class="break" />
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+        
+            
+    <div class="sidebar">
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Guide</h2>
+        <ul>
+        
+            <li><a href="/guide/installation.html" class="sidebar-link current">Installation</a></li>
+        
+            <li><a href="/guide/index.html" class="sidebar-link">はじめに</a></li>
+        
+            <li><a href="/guide/directives.html" class="sidebar-link">ディレクティブの詳細</a></li>
+        
+            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        
+            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+        
+            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+        
+            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        
+            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+        
+            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+        
+            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+        
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+        
+            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<div class="content guide with-sidebar">
+    <h1>Installation</h1>
+    <blockquote>
+<p><strong>Compatibility Note:</strong> Vue.js does not support IE8 and below.</p>
+</blockquote>
+<h2 id="Standalone">Standalone</h2>
+<p>Simply download and include with a script tag. <code>Vue</code> will be registered as a global variable.</p>
+<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.3/dist/vue.js" download target="_blank">Development Version</a><br><span class="light">119.38kb, plenty of comments and debug/warning messages.</span></p>
+<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.3/dist/vue.min.js" download target="_blank">Production Version</a><br><span class="light">39.9kb minified / 13.59kb gzipped</span></p>
+<p>Also available on <a href="//cdnjs.cloudflare.com/ajax/libs/vue/0.10.3/vue.min.js">cdnjs</a> (takes some time to sync so the latest version might not be available yet).</p>
+<h2 id="Component">Component</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ component install yyx990803/vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<p>For edge version (unstable branch, use at your own risk!):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ component install yyx990803/vue@dev
+</pre></td></tr></table></figure>
+
+<h2 id="Browserify">Browserify</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ npm install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<p>For edge version:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ npm install yyx990803/vue<span class="comment">#dev</span>
+</pre></td></tr></table></figure>
+
+<p class="tip">The built version in <code>dist/</code> doesn’t work with Browserify because it assumes it’s loaded in global scope and comes with its own <code>require</code> mechanism. Always directly use source version when using Vue with Browserify.</p>
+
+<h2 id="Bower">Bower</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ bower install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
+</pre></td></tr></table></figure>
+
+<h2 id="AMD_Module_Loaders">AMD Module Loaders</h2>
+<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as an AMD module.</p>
+<h2 id="Ready?">Ready?</h2>
+<p><a href="/guide/">Let’s Get Started</a>.</p>
+
+</div>
+        
+        </div>
+        <script src="/js/common.js"></script>
+    </body>
+</html>

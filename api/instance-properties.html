@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Instance Properties - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "api"
+        </script>
+        <script src="/js/vue.min.js"></script>
+        <link rel="stylesheet" href="/vuejs.org/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        
+            <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>Vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link">Guide</a></li>
+        <li><a href="/api/" class="nav-link current">API Reference</a></li>
+        <br class="break" />
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+        
+            
+    <div class="sidebar">
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Api</h2>
+        <ul>
+        
+            <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
+        
+            <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
+        
+            <li><a href="/api/instance-properties.html" class="sidebar-link current">Instance Properties</a></li>
+        
+            <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
+        
+            <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
+        
+            <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
+        
+            <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<div class="content api with-sidebar">
+    <h1>Instance Properties</h1>
+    <h3 id="vm-$el">vm.$el</h3>
+<ul>
+<li><strong>Type:</strong> <code>HTMLElement</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>The DOM element that the ViewModel is managing.</p>
+<h3 id="vm-$data">vm.$data</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<p>The data object that the ViewModel is observing. You can swap it with a new object. The ViewModel proxies access to the properties on its data object.</p>
+<h3 id="vm-$options">vm.$options</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<p>The instantiation options used for the current ViewModel. This is useful when you want to include custom properties in the options:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
+    customOption: <span class="string">'foo'</span>,
+    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        console.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// 'foo'</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<h3 id="vm-$">vm.$</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>An object that holds child ViewModels that has <code>v-ref</code> registered. For more details see <a href="/api/directives.html#v-ref">v-ref</a>.</p>
+<h3 id="vm-$index">vm.$index</h3>
+<ul>
+<li><strong>Type:</strong> <code>Number</code></li>
+</ul>
+<p>The Array index of a child ViewModel created by <code>v-repeat</code>. For more details see <a href="/api/directives.html#v-repeat">v-repeat</a>.</p>
+<h3 id="vm-$parent">vm.$parent</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object ViewModel</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>The parent ViewModel, if the current ViewModel has one.</p>
+<h3 id="vm-$root">vm.$root</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object ViewModel</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>The root ViewModel. It the current ViewModel has no parents this value will be itself.</p>
+<h3 id="vm-$compiler">vm.$compiler</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object Compiler</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>The Compiler instance of the ViewModel. This object maintains some internal state of the ViewModel such as data bindings and in most cases you should avoid touching it.</p>
+
+</div>
+        
+        </div>
+        <script src="/js/common.js"></script>
+    </body>
+</html>

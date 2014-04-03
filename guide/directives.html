@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ディレクティブの詳細 - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "guide"
+        </script>
+        <script src="/js/vue.min.js"></script>
+        <link rel="stylesheet" href="/vuejs.org/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        
+            <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>Vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+        <li><a href="/api/" class="nav-link">API Reference</a></li>
+        <br class="break" />
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+        
+            
+    <div class="sidebar">
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Guide</h2>
+        <ul>
+        
+            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+        
+            <li><a href="/guide/index.html" class="sidebar-link">はじめに</a></li>
+        
+            <li><a href="/guide/directives.html" class="sidebar-link current">ディレクティブの詳細</a></li>
+        
+            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        
+            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+        
+            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+        
+            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        
+            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+        
+            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+        
+            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+        
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+        
+            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<div class="content guide with-sidebar">
+    <h1>ディレクティブの詳細</h1>
+    <h2 id="概要">概要</h2>
+<p><em>If you have not used AngularJS before, you probably don’t know what a directive is. Essentially, a directive is some special token in the markup that tells the library to do something to a DOM element. In Vue.js, the concept of directive is drastically simpler than that in Angular. A Vue.js directive can only appear in the form of a prefixed HTML attribute that takes the following format:</em></p>
+<p>あなたがもし以前にAngularJSを使った事がない場合、おそらくディレクティブとは何か知らないでしょう。本来、ディレクティブはライブラリに対してDOMエレメントをどう扱うのか指示するための、マークアップ上の何か特別な印です。Vue.jsでのディレクティブのコンセプトは、Angularでのそれよりも大幅にシンプルにすることです。Vue.jsのディレクティブは、次に示す書式のように接頭語付きのHTML属性として表現されます。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">element</span> <span class="attribute">prefix-directiveId</span>=<span class="value">"[arg:] ( keypath | expression ) [filters...]"</span>&gt;</span><span class="tag">&lt;/<span class="title">element</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="簡単な例">簡単な例</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>Here the prefix is <code>v</code> which is the default. The directive ID is <code>text</code> and the the keypath is <code>message</code>. This directive instructs Vue.js to update the div’s <code>textContent</code> whenever the <code>message</code> property on the ViewModel changes.</em></p>
+<p>ここでの接頭語<code>v</code>がデフォルトです。ディレクティブIDは<code>text</code>、そしてそのキーパスは<code>message</code>です。このディレクティブはViewModelの<code>message</code>プロパティが変更されるたびにdivの<code>textContent</code>を変更します。</p>
+<h2 id="インライン式">インライン式</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"'hello ' + user.firstName + ' ' + user.lastName"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>Here we are using a computed expression instead of a single property key. Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop.</em></p>
+<p>ここでは、単純なプロパティではなく計算式を使ってみます。Vue.jsは式が依存しているプロパティを自動的に追跡しています。そして、依存先が変更されるたびにディレクティブをリフレッシュします。非同期バッチ処理のおかげで、複数の依存先が変更されたとしても、式は1回のイベントループのみで変更されます。</p>
+<p><em>You should use expressions wisely and avoid putting too much logic in your templates, especially statements with side effects (with the exception of event listener expressions). To discourage the overuse logic inside templates, Vue.js inline expressions are limited to <strong>one statement only</strong>. For bindings that require more complicated operations, use <a href="/guide/computed.html">Computed Properties</a> instead.</em></p>
+<p>あなたは式を賢く使う必要があります。特に（イベントリスナー式を除く）副作用のある構文の場合、テンプレートの中に多くのロジックを詰め込むことを避けなければなりません。テンプレートの中にロジックを詰め込みすぎることを防ぐため、Vue.jsのインライン式は<strong>1構文のみ</strong>に制限されています。バインディングのため、さらに複雑な操作が必要な場合、<a href="/guide/computed.html">Computed Properties</a>を代わりに使用してください。</p>
+<p class="tip"><em>For security reasons, in inline expressions you can only access properties and methods present on the current context ViewModel and its parents.</em><br>インライン式の内部ではセキュリティ上の理由により、現在のコンテキストもしくは、その親のViewModelに存在するプロパティと関数しかアクセスできないように制限しています。</p>
+
+<h2 id="引数">引数</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"click : clickHandler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>Some directives require an argument before the keypath or expression. In this example the <code>click</code> argument indicates we want the <code>v-on</code> directive to listen for a click event and then call the <code>clickHandler</code> method of the ViewModel instance.</em></p>
+<p>いくつかのディレクティブはキーパスか式の前に引数を必要としています。この例の中での<code>click</code>引数は、<code>v-on</code>ディレクティブはクリックイベントをリッスンしたいいうことを示しています。その時、ViewModelの<code>clickHandler</code>関数を呼び出します。</p>
+<h2 id="フィルタ">フィルタ</h2>
+<p><em>Filters can be appended to directive keypaths or expressions to further process the value before updating the DOM. Filters are denoted by a single pipe (<code>|</code>) as in shell scripts. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</em></p>
+<p>フィルタはDOMを更新する前の値を処理するために、ディレクティブのキーパスや式にプロセスを追加します。フィルタは、shellスクリプトのようにパイプ(<code>|</code>)にて表現されます。詳細についてはこちらを参照してください。<a href="/guide/filters.html">Filters in Depth</a></p>
+<h2 id="複数式">複数式</h2>
+<p><em>You can create multiple bindings of the same directive in a single attribute, separated by commas:</em></p>
+<p>カンマで区切る事で、ディレクティブ内の一つの属性に複数のバインディングをつくることができます。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"
+    click   : onClick,
+    keyup   : onKeyup,
+    keydown : onKeydown
+"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="リテラルディレクティブ">リテラルディレクティブ</h2>
+<p><em>Some directives don’t create data bindings - they simply take the attribute value as a literal string. For example the <code>v-component</code> directive:</em></p>
+<p>いくつかのディレクティブはデータバインディングを作成しないでください。それらはリテラル文字列のような値を引数に持つシンプルな属性です。例えば<code>v-component</code>ディレクティブ。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"my-component"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>Here <code>&quot;my-component&quot;</code> is not a data property - it’s a string ID that Vue.js uses to lookup the corresponding Component constructor.</em></p>
+<p>ここでの<code>&quot;my-component&quot;</code>はデータプロパティではありません。これはVue.jsが概要するコンポーネントのコンストラクタを検索する際に利用する文字列のIDです。</p>
+<p><em>Since Vue.js 0.10, you can also use mustache expressions inside literal directives. This allows you to dynamically resolve the type of component you want to use:</em></p>
+<p>Vue.js0.10以降、リテラルディレクティブの内部でmustache式も使う事ができます。これにより、使用したいコンポーネントの型を動的に解決することができます。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"{&#123; isOwner ? 'owner-panel' : 'guest-panel' &#125;}"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>However, note that mustache expressions inside literal directives are evaluated <strong>only once</strong>. After the directive has been compiled, it will no longer react to value changes. To dynamically instantiate different components at run time, use the <a href="/api/directives.html#v-view">v-view</a> directive.</em></p>
+<p>ただし、リテラルディレクティブ内部のmustache式の評価は<strong>1回限り</strong>ですので、注意してください。ディレクティブがコンパイルされた後は、値の変更に反応することはありません。実行時に動的に異なるコンポーネントをインスタンス化する場合は<a href="/api/directives.html#v-view">v-view</a>を使用してください。</p>
+<p><em>A full list of literal directives can be found in the <a href="/api/directives.html#literal-directives">API reference</a>.</em></p>
+<p>リテラルディレクティブのすべての一覧は、<a href="/api/directives.html#literal-directives">API reference</a>で見る事ができます。</p>
+<h2 id="空ディレクティブ">空ディレクティブ</h2>
+<p><em>Some directives don’t even expect an attribute value - they simply do something to the element once and only once. For example the <code>v-pre</code> directive:</em></p>
+<p>いくつかのディレクティブは属性値を必要としていません。それらは単に一度だけ要素に対して何かを行います。例えば、<code>v-pre</code>ディレクティブ。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-pre</span>&gt;</span>
+    <span class="comment">&lt;!-- markup in here will not be compiled --&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><em>A full list of empty directives can be found in the <a href="/api/directives.html#empty-directives">API reference</a>.</em></p>
+<p>空ディレクティブのすべての一覧は、<a href="/api/directives.html#empty-directives">API reference</a>で見る事ができます。</p>
+<h2 id="カスタムディレクティブを作成する">カスタムディレクティブを作成する</h2>
+<p><em>You can register a global custom directive with the <code>Vue.directive()</code> method, passing in a <strong>directiveID</strong> followed by a <strong>definition object</strong>. A definition object can provide several hook functions (all optional):</em></p>
+<p><code>Vue.directive()</code>メソッドに<strong>directiveID</strong>と次に<strong>定義するオブジェクト</strong>を渡すことで、グローバルなカスタムディレクティブを登録することができます。</p>
+<ul>
+<li><strong>bind</strong>: <em>called only once, when the directive is first bound to the element.</em>ディレクティブが初めて要素に縛られる際に一度だけ呼び出されます。</li>
+<li><strong>update</strong>: <em>called when the binding value changes. The new value is provided as the argument.</em>バインディングされている値が変更される際に呼び出されます。新しい値は引数のように渡されます。</li>
+<li><strong>unbind</strong>: <em>called only once, when the directive is unbound from the element.</em>ディレクティブが要素から引きはがされる際に一度だけ呼び出されます。</li>
+</ul>
+<p><strong>Example</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'my-directive'</span>, {
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+        <span class="comment">// do preparation work</span>
+        <span class="comment">// e.g. add event listeners or expensive stuff</span>
+        <span class="comment">// that needs to be run only once</span>
+        <span class="comment">// `value` is the initial value</span>
+        <span class="comment">// 準備作業を行います</span>
+        <span class="comment">// 例）イベントリスナや一度だけ実行すれば良いコストの高い処理</span>
+        <span class="comment">// `value`は初期値です</span>
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+        <span class="comment">// do something based on the updated value</span>
+        <span class="comment">// this will also be called for the initial value</span>
+        <span class="comment">// 値の変更を元に何か行います</span>
+        <span class="comment">// 初期値を渡して呼び出すこともできます</span>
+    },
+    unbind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// do clean up work</span>
+        <span class="comment">// e.g. remove event listeners added in bind()</span>
+        <span class="comment">// 事後処理を行います</span>
+        <span class="comment">// 例）bind()にて追加されたイベントリスナーを削除する</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><em>Once registered, you can use it in Vue.js templates like this (you need to add the Vue.js prefix to it):</em></p>
+<p>ひとたび登録すると、Vue.jsのテンプレートにて以下のように使う事ができます。（それにVue.jsの接頭語を付ける必要がありますが。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-my-directive</span>=<span class="value">"someValue"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>When you only need the <code>update</code> function, you can pass in a single function instead of the definition object:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'my-directive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+    <span class="comment">// this function will be used as update()</span>
+})
+</pre></td></tr></table></figure>
+
+<p>All the hook functions will be copied into the actual <strong>directive object</strong>, which you can access inside these functions as their <code>this</code> context. The directive object exposes some useful properties:</p>
+<ul>
+<li><strong>el</strong>: the element the directive is bound to.</li>
+<li><strong>key</strong>: the keypath of the binding, excluding arguments and filters.</li>
+<li><strong>arg</strong>: the argument, if present.</li>
+<li><strong>expression</strong>: the raw, unparsed expression.</li>
+<li><strong>vm</strong>: the context ViewModel that owns this directive.</li>
+<li><strong>value</strong>: the current binding value.</li>
+</ul>
+<p class="tip">You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+
+<p>An example of a custom directive using some of these properties:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span> <span class="attribute">v-demo</span>=<span class="value">"LightSlateGray : msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'demo'</span>, {
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">this</span>.el.style.color = <span class="string">'#fff'</span>
+        <span class="keyword">this</span>.el.style.backgroundColor = <span class="keyword">this</span>.arg
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+        <span class="keyword">this</span>.el.innerHTML =
+            <span class="string">'argument - '</span> + <span class="keyword">this</span>.arg + <span class="string">'&lt;br&gt;'</span> +
+            <span class="string">'key - '</span> + <span class="keyword">this</span>.key + <span class="string">'&lt;br&gt;'</span> +
+            <span class="string">'value - '</span> + value
+    }
+})
+<span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        msg: <span class="string">'hello!'</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result</strong></p>
+<p><div id="demo" v-demo="LightSlateGray : msg"></div></p>
+<script>
+Vue.directive('demo', {
+    bind: function () {
+        this.el.style.color = '#fff'
+        this.el.style.backgroundColor = this.arg
+    },
+    update: function (value) {
+        this.el.innerHTML =
+            'argument - ' + this.arg + '<br>' +
+            'key - ' + this.key + '<br>' +
+            'value - ' + value
+    }
+})
+var demo = new Vue({
+    el: '#demo',
+    data: {
+        msg: 'hello!'
+    }
+})
+</script>
+
+<h3 id="Creating_Literal_&amp;_Empty_Directives">Creating Literal &amp; Empty Directives</h3>
+<p>If you pass in <code>isLiteral: true</code> or <code>isEmpty: true</code> when creating a custom directive, all data-binding work will be skipped for that directive, and only <code>bind()</code> and <code>unbind()</code> will be called. In literal directives the expression will still be parsed, so you can still access information such as <code>this.expression</code>, <code>this.key</code> and <code>this.arg</code>. For empty directives, Vue.js will never parse the expression even if it exists.</p>
+<p>Example:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-literal-dir</span>=<span class="value">"foo"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'literal-dir'</span>, {
+    isLiteral: <span class="literal">true</span>,
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        console.log(<span class="keyword">this</span>.expression) <span class="comment">// 'foo'</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<h3 id="Creating_a_Function_Directive">Creating a Function Directive</h3>
+<p>Vue.js encourages the developer to separate data from behavior, so instance methods are expected to be contained in the <code>methods</code> option and not inside data objects. As a result, functions inside data objects are ignored and normal directives will not be able to bind to them.</p>
+<p>To gain access to functions inside <code>methods</code> in your custom directive, you need to pass in the <code>isFn</code> option:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'my-handler'</span>, {
+    isFn: <span class="literal">true</span>, <span class="comment">// important!</span>
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// ...</span>
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(handler)</span> {</span>
+        <span class="comment">// the passed in value is a function</span>
+    },
+    unbind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// ...</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<p>Passing in <code>isFn:true</code> also enables your custom directive to accept inline expressions like <code>v-on</code> does. For more comprehensive examples, checkout <code>src/directives/</code> in the source code.</p>
+<p>Next: <a href="/guide/filters.html">Filters in Depth</a>.</p>
+
+</div>
+        
+        </div>
+        <script src="/js/common.js"></script>
+    </body>
+</html>
