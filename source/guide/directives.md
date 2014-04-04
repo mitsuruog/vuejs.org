@@ -124,9 +124,9 @@ _You can register a global custom directive with the `Vue.directive()` method, p
 
 `Vue.directive()`メソッドに**directiveID**と次に**定義するオブジェクト**を渡すことで、グローバルなカスタムディレクティブを登録することができます。
 
-- **bind**: _called only once, when the directive is first bound to the element._ディレクティブが初めて要素に縛られる際に一度だけ呼び出されます。
-- **update**: _called when the binding value changes. The new value is provided as the argument._バインディングされている値が変更される際に呼び出されます。新しい値は引数のように渡されます。
-- **unbind**: _called only once, when the directive is unbound from the element._ディレクティブが要素から引きはがされる際に一度だけ呼び出されます。
+- **bind**: _called only once, when the directive is first bound to the element._ ディレクティブが初めてバインドされる際に一度だけ呼び出されます。
+- **update**: _called when the binding value changes. The new value is provided as the argument._ バインディングされている値が変更される際に呼び出されます。新しい値は引数のように渡されます。
+- **unbind**: _called only once, when the directive is unbound from the element._ ディレクティブがアンバインドされる際に一度だけ呼び出されます。
 
 **Example**
 
@@ -164,7 +164,9 @@ _Once registered, you can use it in Vue.js templates like this (you need to add 
 <div v-my-directive="someValue"></div>
 ```
 
-When you only need the `update` function, you can pass in a single function instead of the definition object:
+_When you only need the `update` function, you can pass in a single function instead of the definition object:_
+
+`update`関数のみ必要な場合は、定義するオブジェクトの代わりに一つの関数を渡してください。
 
 ``` js
 Vue.directive('my-directive', function (value) {
@@ -174,16 +176,21 @@ Vue.directive('my-directive', function (value) {
 
 All the hook functions will be copied into the actual **directive object**, which you can access inside these functions as their `this` context. The directive object exposes some useful properties:
 
-- **el**: the element the directive is bound to.
-- **key**: the keypath of the binding, excluding arguments and filters.
-- **arg**: the argument, if present.
-- **expression**: the raw, unparsed expression.
-- **vm**: the context ViewModel that owns this directive.
-- **value**: the current binding value.
+すべてのフック用の関数は実際の**ディレクティブオブジェクト**にコピーされます。それらは関数内部の`this`コンテキスにてアクセスできるようになります。ディレクティブオブジェクトの便利なプロパティをいくつか挙げます。
 
-<p class="tip">You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+- **el**: _the element the directive is bound to._ ディレクティブがバインドされている要素
+- **key**: _the keypath of the binding, excluding arguments and filters._ 引数とフォルタを除く、バインドされたキーパス
+- **arg**: _the argument, if present._ もし存在する場合は、その引数
+- **expression**: _the raw, unparsed expression._ パースされる前の生の値
+- **vm**: _the context ViewModel that owns this directive._ このディレクティブを所有しているコンテキストViewModel
+- **value**: _the current binding value._ 現在のバインドされている値
 
-An example of a custom directive using some of these properties:
+<p class="tip">_You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones._
+これらすべてのプロパティはReadOnlyとして扱い、これらの変更は控えなければなりません。ディレクティブオブジェクトに対してカスタムプロパティを追加することもできますが、誤って既存の内部プロパティを上書きしないよう注意しなければなりません。</p>
+
+_An example of a custom directive using some of these properties:_
+
+これらいくつかのプロパティを使用したカスタムディレクティブの例です。
 
 ``` html
 <div id="demo" v-demo="LightSlateGray : msg"></div>
@@ -234,9 +241,11 @@ var demo = new Vue({
 })
 </script>
 
-### Creating Literal &amp; Empty Directives
+### リテラルディレクティブと空ディレクティブを作成する
 
-If you pass in `isLiteral: true` or `isEmpty: true` when creating a custom directive, all data-binding work will be skipped for that directive, and only `bind()` and `unbind()` will be called. In literal directives the expression will still be parsed, so you can still access information such as `this.expression`, `this.key` and `this.arg`. For empty directives, Vue.js will never parse the expression even if it exists.
+_If you pass in `isLiteral: true` or `isEmpty: true` when creating a custom directive, all data-binding work will be skipped for that directive, and only `bind()` and `unbind()` will be called. In literal directives the expression will still be parsed, so you can still access information such as `this.expression`, `this.key` and `this.arg`. For empty directives, Vue.js will never parse the expression even if it exists._
+
+カスタムディレクティブを作成する際に、`isLiteral: true`もしくは`isEmpty: true`を渡すことで、ディレクティブのためのすべてのデータバインディング処理はスキップされ、`bind()`と`unbind()`のみ呼び出されます。リテラルディレクティブでは、まだ式が解析されていないため、`this.expression`、`this.key`、 `this.arg`などの情報にまだアクセスすることができます。空ディレクティブに於いては、式が渡されてもVue.jsが解析することはありません。
 
 Example:
 
@@ -253,9 +262,11 @@ Vue.directive('literal-dir', {
 })
 ```
 
-### Creating a Function Directive
+### 関数ディレクティブを作成する
 
-Vue.js encourages the developer to separate data from behavior, so instance methods are expected to be contained in the `methods` option and not inside data objects. As a result, functions inside data objects are ignored and normal directives will not be able to bind to them.
+_Vue.js encourages the developer to separate data from behavior, so instance methods are expected to be contained in the `methods` option and not inside data objects. As a result, functions inside data objects are ignored and normal directives will not be able to bind to them._
+
+Vue.jsはデータと振る舞いとの分離を開発者に推奨しています。インスタンスメソッドは`methods`オプション内で定義され、データオブジェクト内に存在してはいけません。
 
 To gain access to functions inside `methods` in your custom directive, you need to pass in the `isFn` option:
 
