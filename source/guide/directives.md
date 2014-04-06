@@ -266,9 +266,11 @@ Vue.directive('literal-dir', {
 
 _Vue.js encourages the developer to separate data from behavior, so instance methods are expected to be contained in the `methods` option and not inside data objects. As a result, functions inside data objects are ignored and normal directives will not be able to bind to them._
 
-Vue.jsはデータと振る舞いとの分離を開発者に推奨しています。インスタンスメソッドは`methods`オプション内で定義され、データオブジェクト内に存在してはいけません。
+Vue.jsはデータと振る舞いとの分離を開発者に推奨しています。インスタンスメソッドはデータオブジェクト内ではない、`methods`オプションに定義されているべきです。その結果、データオブジェクト内部の関数は無視され、通常のディレクティブはそれらにバインドすることはできません。
 
-To gain access to functions inside `methods` in your custom directive, you need to pass in the `isFn` option:
+_To gain access to functions inside `methods` in your custom directive, you need to pass in the `isFn` option:_
+
+カスタムディレクティブ内の`methods`内部の関数へのアクセスできるようにするためには、`isFn`オプションを渡す必要があります。
 
 ``` js
 Vue.directive('my-handler', {
@@ -285,6 +287,10 @@ Vue.directive('my-handler', {
 })
 ```
 
-Passing in `isFn:true` also enables your custom directive to accept inline expressions like `v-on` does. For more comprehensive examples, checkout `src/directives/` in the source code.
+_Passing in `isFn:true` also enables your custom directive to accept inline expressions like `v-on` does. For more comprehensive examples, checkout `src/directives/` in the source code._
 
-Next: [Filters in Depth](/guide/filters.html).
+`isFn:true`を渡すことで、`v-on`のようなインライン式からカスタムディレクティブへアクセスできるようになります。もっと具体的な例は、`src/directives/`にあるソースコードを参照してください。
+
+_Next: [Filters in Depth](/guide/filters.html)._
+
+次は[Filters in Depth](/guide/filters.html)
